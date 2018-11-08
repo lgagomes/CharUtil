@@ -1,2 +1,2 @@
 # CharUtil
-Tool to help with some calculations to Dungeons & Dragons 3.5
+Tool written in C# to help with some calculations to Dungeons & Dragons 3.5
