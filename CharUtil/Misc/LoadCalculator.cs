@@ -18,8 +18,8 @@ namespace CharUtil
             double maxLoad;
             double sizeModifier = GetSizeModifier(sizeCategory, hasFourLegs);
 
-            if (strength <= 0)
-                throw new ArgumentException("Strenght should be greanter than 0");
+            if (strength == 0)
+                maxLoad = 0;
 
             else if (strength > 0 && strength <= 10)
                 maxLoad = strength * 10;
