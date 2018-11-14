@@ -8,6 +8,7 @@
             MaxSpellCycle = 5;
             FirstDC = 1;
             KeyAttribute = "Wisdom";
+            CombatantType = 1;
         }
     }
 }

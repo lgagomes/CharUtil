@@ -488,5 +488,47 @@ namespace XUnitSpellcasters
             Assert.Equal(lbs, load.LoadsLbs);
             Assert.Equal(kgs, load.LoadsKgs);
         }
+
+        [Fact]
+        public void TestBaseAttackBonus()
+        {
+            // Arrange
+            Barbarian barbarian = new Barbarian("barbarian");
+            Monk monk = new Monk("monk");
+            Wizard wizard = new Wizard("wizard");
+
+            barbarian.CharacterLevel = 11;
+            monk.CharacterLevel = 6;
+            wizard.CharacterLevel = 20;
+
+            double[] barbarianTemplate = { 11, 6, 1, 0 };
+            double[] monkTemplate = { 4, 0, 0, 0 };
+            double[] wizardTemplate = { 10, 5, 0, 0 };
+
+            // Act
+            barbarian.CalculateBaseAttackBonus();
+            monk.CalculateBaseAttackBonus();
+            wizard.CalculateBaseAttackBonus();
+
+            // Assert
+            Assert.Equal(barbarianTemplate, barbarian.BaseAttackBonus);
+            Assert.Equal(monkTemplate, monk.BaseAttackBonus);
+            Assert.Equal(wizardTemplate, wizard.BaseAttackBonus);
+        }
+
+        [Fact]
+        public void TestMonkFuryBlows()
+        {
+            // Arrange
+            Monk monk = new Monk("monk");
+            monk.CharacterLevel = 18;
+            double[] template = { 13, 13, 13, 8, 3 };
+
+            // Act
+            monk.CalculateFuryOfBlowsBonus();
+
+            // Assert
+            Assert.Equal(template, monk.FuryOfBlowsBonus);
+        }
     }
 }
