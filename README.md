@@ -10,9 +10,9 @@ Features (so far):
   
   - For all classes:
     * Carrying capacity (showed in kilograms or pounds), based on: 
-      +character's strenght
-      +characters's size
-      +character's number of legs (biped or quadruped)
+      + character's strenght
+      + characters's size
+      + character's number of legs (biped or quadruped)
       
   - Base Attack Bonus, based on level for all classes
 
