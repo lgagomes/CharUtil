@@ -6,7 +6,7 @@ Features (so far):
     * Spells DC per level, based on key attribute (Intelligence, Charisma or Wisdom)
     * Extra spells per level, based on key attribute (Intelligence, Charisma or Wisdom)
     * Available spells slots per day, based on character class and level
-    * Known spells per level, applicable only to Bard and Sorcererr
+    * Known spells per level (only to Bard and Sorcerer)
     * Keep track of spells slots used
   
   - For all classes:
