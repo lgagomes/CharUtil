@@ -117,4 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label47.Text" xml:space="preserve">
+    <value>*Only applicable to a monk who doesn't
+wear any armor. Also, when using flurry
+of blows, a monk may attack only with 
+unarmed strikes or with special monk 
+weapons (kama, nunchaku, quarterstaff, 
+sai, shuriken, and siangham).</value>
+  </data>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJeSURBVDhPjZHrS5NhGMZvyxx+8YMdPvilQKMTQZQajewo
+        FtFpih0EF1rWsgRD3Rzl7KAhhDj8YJlkM0EbjsSwNZcupxipfYiSDiyn/gOLmQ0Ktqvnft5XUZjQBT+4
+        n/u6rud9eV+KpkgkohGsE6QINqqzRrWXF4DYn3NzO15/mHnSNeybsr31/3kq4Nk5Pt3KHmfU+FKx4Rzz
+        X77XPvrL2vMdtfYvS+BdjfB63/+4EvWSmmeD+uJmb7iy7SMqbQptA37J/Jm9kpah8F3boF6tKYrXViTt
+        N3YFrz8awzylj0cRjkQkPC/2DhkdwdWZFUlqnWhVhrkuv96LCw3DC+TXD6F7xC/hebFXYB2GJuNmnVqn
+        mKTTDyZy7nswj652APahSTxnvJPyvNhnNuQ2THCXaGtu3PqzjaGsKhcklj5kWtxo7feJb6XosOUNsm73
+        S48zRywubNE3hbhLlHJUs+ZkQ0hb/hJaYy+0Zje0tzxIN/erdWBvlQcH7niRbnJhc7EDa/NsoIPVIe6K
+        t6heQfuqv8WeakH8+U4kFPYg8aobiYY+zM7OIhgMIq7ACdK/Ap1zgLLbQcebwR3ZlUors5JO3HrGDsrv
+        BV3ygC56EAgEJFQ4oOzY44yuDZRWblXKrG1FyXSscY7yukEFblCRF6aOzwsXmDo+id2g4nGGsztLktW2
+        ql2lBtJ1huWTDO9gcvhgejEtmIKpyyd2I8pbcIazURRDqTeKKdv2m66Ng8q+gswzCjzzjj3OyN+3nLYb
+        NtFu40M60TRNOfa/Ep73iF2q8P5fuSvFb0qQ8BxVRP8ABLPILFmlMDQAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>43</value>
+  </metadata>
 </root>

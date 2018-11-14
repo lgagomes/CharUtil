@@ -27,8 +27,8 @@ namespace CharUtil
             else
             {
                 /* source:
-                 * https://paizo.com/threads/rzs2qa0i?I-am-looking-for-the-math-behind-carrying#10
-                 */
+                 * https://paizo.com/threads/rzs2qa0i?I-am-looking-for-the-math-behind-carrying#10 */
+
                 int index = 1 + strength - 10 * (strength / 10);
                 double[] vec = new double[10] { 25, 28.75, 32.5, 37.5, 43.75, 50, 57.5, 65, 75, 87.5 };
                 double pot = Math.Pow(4, (strength / 10));

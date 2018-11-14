@@ -8,6 +8,7 @@
             MaxSpellCycle = 7;
             FirstDC = 0;
             KeyAttribute = "Charisma";
+            CombatantType = 2;
         }
     }
 }

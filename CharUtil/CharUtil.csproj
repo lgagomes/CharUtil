@@ -46,15 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterClasses\Barbarian.cs" />
     <Compile Include="CharacterClasses\Bard.cs" />
     <Compile Include="CharacterClasses\BaseClass.cs" />
     <Compile Include="CharacterClasses\Cleric.cs" />
     <Compile Include="CharacterClasses\Druid.cs" />
     <Compile Include="CharacterClasses\KnowlerOfSpells.cs" />
+    <Compile Include="CharacterClasses\Monk.cs" />
     <Compile Include="CharacterClasses\Paladin.cs" />
     <Compile Include="CharacterClasses\Ranger.cs" />
+    <Compile Include="CharacterClasses\Rogue.cs" />
     <Compile Include="CharacterClasses\Sorcerer.cs" />
     <Compile Include="CharacterClasses\Spellcaster.cs" />
+    <Compile Include="CharacterClasses\Warrior.cs" />
     <Compile Include="CharacterClasses\Wizard.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

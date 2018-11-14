@@ -12,20 +12,23 @@ namespace CharUtil
 {
     public partial class Form1 : Form
     {
-        private List<Spellcaster> spellcasters;
+        private List<Spellcaster> spellcastersList;
         private List<KnowlerOfSpells> knowlers;
         private List<Label> spellDCs;
         private List<Label> extraSpells;
         private List<Button> castButtons;
         private List<TextBox> knownSpells;
-        private TextBox[] spellsPerDay;        
-        private Spellcaster character;
+        private TextBox[] spellsPerDay;
+        private Spellcaster spellcaster;
         private CasterSelector selector;
 
         private LoadCalculator loadCalculator;
         private int sizeModifiersCode = 4;
         private TextBox[] carryCapacities;
         private List<Label> unityLabels;
+
+        private List<BaseClass> allClasses;
+        private BaseClass baseClass;
 
         public Form1()
         {
@@ -36,11 +39,12 @@ namespace CharUtil
         {
             #region general initializations
 
-            spellcasters = new List<Spellcaster>();
+            spellcastersList = new List<Spellcaster>();
             knowlers = new List<KnowlerOfSpells>();
             castButtons = new List<Button>();
             loadCalculator = new LoadCalculator();
             unityLabels = new List<Label>();
+            allClasses = new List<BaseClass>();
 
             InitializeLevels();
 
@@ -65,49 +69,97 @@ namespace CharUtil
             #endregion
 
             #region initialize all classes
-            character = new Spellcaster();
+            spellcaster = new Spellcaster();
             selector = new CasterSelector();
+
+            Barbarian barbarian = new Barbarian("barbarian");
+            barbarian.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
+            AddClassMisc(barbarian);
 
             Bard bard = new Bard("Bard");
             bard.CharacterLevel = Convert.ToInt32(comboBoxLevel.Text);
             bard.Charisma = Convert.ToInt32(textBoxKeyAttribute.Text);
             AddClass(bard);
             knowlers.Add(bard);
+            AddClassMisc(bard);
 
             Cleric cleric = new Cleric("Cleric");
             cleric.CharacterLevel = Convert.ToInt32(comboBoxLevel.Text);
             cleric.Wisdom = Convert.ToInt32(textBoxKeyAttribute.Text);
             AddClass(cleric);
+            AddClassMisc(cleric);
 
             Druid druid = new Druid("Druid");
             druid.CharacterLevel = Convert.ToInt32(comboBoxLevel.Text);
             druid.Wisdom = Convert.ToInt32(textBoxKeyAttribute.Text);
             AddClass(druid);
+            AddClassMisc(druid);
+
+            Monk monk = new Monk("monk");
+            monk.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
+            AddClassMisc(monk);
 
             Paladin paladin = new Paladin("Paladin");
             paladin.CharacterLevel = Convert.ToInt32(comboBoxLevel.Text);
             paladin.Charisma = Convert.ToInt32(textBoxKeyAttribute.Text);
             AddClass(paladin);
+            AddClassMisc(paladin);
 
             Ranger ranger = new Ranger("Ranger");
             ranger.CharacterLevel = Convert.ToInt32(comboBoxLevel.Text);
             ranger.Wisdom = Convert.ToInt32(textBoxKeyAttribute.Text);
             AddClass(ranger);
+            AddClassMisc(ranger);
+
+            Rogue rogue = new Rogue("rogue");
+            rogue.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
+            AddClassMisc(rogue);
 
             Sorcerer sorcerer = new Sorcerer("Sorcerer");
             sorcerer.CharacterLevel = Convert.ToInt32(comboBoxLevel.Text);
             sorcerer.Charisma = Convert.ToInt32(textBoxKeyAttribute.Text);
             AddClass(sorcerer);
             knowlers.Add(sorcerer);
+            AddClassMisc(sorcerer);
+
+            Warrior warrior = new Warrior("warrior");
+            warrior.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
+            AddClassMisc(warrior);
 
             Wizard wizard = new Wizard("Wizard");
             wizard.CharacterLevel = Convert.ToInt32(comboBoxLevel.Text);
             wizard.Intelligence = Convert.ToInt32(textBoxKeyAttribute.Text);
             AddClass(wizard);
+            AddClassMisc(wizard);
 
             #endregion
         }
-        
+
+        #region general methods
+
+        private void InitializeLevels()
+        {
+            for (int i = 1; i <= 20; i++)
+            {
+                comboBoxLevel.Items.Add(i.ToString());
+                comboBoxLevelBAB.Items.Add(i.ToString());
+            }
+
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Copyright© 2018 Luiz Gustavo A. Gomes\n\n" +
+                "If you have any questions just contact me at\n" +
+                "\t\tlgustavogom@gmail.com\n\n" +
+                "This program uses content from the d20 System.\n" +
+                "With no intention to replace the books for full descriptions, " +
+                "but rather to be a tool to ease the character creation.",
+                "About", MessageBoxButtons.OK);
+        }
+
+        #endregion
+
         #region spellcasting tab's related stuff
 
         private void InitializeCastButtons()
@@ -128,17 +180,11 @@ namespace CharUtil
 
             buttonRegainSpells.Enabled = false;
         }
-        
+
         private void AddClass(Spellcaster spellcasterCharacter)
         {
-            spellcasters.Add(spellcasterCharacter);
+            spellcastersList.Add(spellcasterCharacter);
             comboBoxClasses.Items.Add(spellcasterCharacter.ClassName.ToString());
-        }
-
-        private void InitializeLevels()
-        {
-            for (int i = 1; i <= 20; i++)
-                comboBoxLevel.Items.Add(i.ToString());
         }
 
         private void InitializeDCs()
@@ -201,14 +247,14 @@ namespace CharUtil
         {
             if (!string.Equals(comboBoxClasses.Text, "Choose a Class"))
             {
-                selector.Select(character, labelBaseScore.Text, Convert.ToInt32(textBoxKeyAttribute.Text));
-                character.UpdateSpellsDC();
+                selector.Select(spellcaster, labelBaseScore.Text, Convert.ToInt32(textBoxKeyAttribute.Text));
+                spellcaster.UpdateSpellsDC();
 
                 int i = 0;
                 foreach (var item in spellDCs)
                 {
-                    if (character.SpellsDC[i] > -1)
-                        item.Text = character.SpellsDC[i].ToString();
+                    if (spellcaster.SpellsDC[i] > -1)
+                        item.Text = spellcaster.SpellsDC[i].ToString();
                     else
                         item.Text = "-";
                     i++;
@@ -218,14 +264,14 @@ namespace CharUtil
 
         private void ShowExtraSpells()
         {
-            selector.Select(character, labelBaseScore.Text, Convert.ToInt32(textBoxKeyAttribute.Text));
-            character.UpdateExtraSpells();
+            selector.Select(spellcaster, labelBaseScore.Text, Convert.ToInt32(textBoxKeyAttribute.Text));
+            spellcaster.UpdateExtraSpells();
 
             int i = 0;
             foreach (var item in extraSpells)
             {
-                if (character.ExtraSpells[i] >= 0)
-                    item.Text = character.ExtraSpells[i].ToString();
+                if (spellcaster.ExtraSpells[i] >= 0)
+                    item.Text = spellcaster.ExtraSpells[i].ToString();
                 else
                     item.Text = "-";
                 i++;
@@ -236,12 +282,12 @@ namespace CharUtil
         {
             int level = Convert.ToInt32(comboBoxLevel.Text);
 
-            character.UpdateSpellsPerDay();
+            spellcaster.UpdateSpellsPerDay();
 
             for (int i = 0; i < spellsPerDay.Length; i++)
             {
-                if (character.DailySpells[level - 1, i] > 0)
-                    spellsPerDay[i].Text = character.DailySpells[level - 1, i].ToString();
+                if (spellcaster.DailySpells[level - 1, i] > 0)
+                    spellsPerDay[i].Text = spellcaster.DailySpells[level - 1, i].ToString();
                 else
                     spellsPerDay[i].Text = "-";
             }
@@ -281,21 +327,21 @@ namespace CharUtil
         {
             int level = Convert.ToInt32(comboBoxLevel.Text);
 
-            character.CastSpell(level, spellCycle);
+            spellcaster.CastSpell(level, spellCycle);
 
-            spellsPerDay[spellCycle].Text = character.DailySpells[level - 1, spellCycle].ToString();
+            spellsPerDay[spellCycle].Text = spellcaster.DailySpells[level - 1, spellCycle].ToString();
         }
 
         private void comboBoxClasses_SelectedIndexChanged(object sender, EventArgs e)
         {
-            character = spellcasters.Find(x => x.ClassName == comboBoxClasses.Text.ToString());
+            spellcaster = spellcastersList.Find(x => x.ClassName == comboBoxClasses.Text.ToString());
 
-            labelBaseScore.Text = character.KeyAttribute;
+            labelBaseScore.Text = spellcaster.KeyAttribute;
             ShowSpellsDC();
             ShowExtraSpells();
             ShowSpellsPerDay();
 
-            bool signal = selector.IsKnownlerOfSpells(character);
+            bool signal = selector.IsKnownlerOfSpells(spellcaster);
             ShowKnownSpells(signal);
             ResetKnownSpells(signal);
 
@@ -318,12 +364,12 @@ namespace CharUtil
             }
             else if (textBoxKeyAttribute.Text != "")
             {
-                selector.Select(character, labelBaseScore.Text, Convert.ToInt32(textBoxKeyAttribute.Text));
+                selector.Select(spellcaster, labelBaseScore.Text, Convert.ToInt32(textBoxKeyAttribute.Text));
 
-                if (character.KeyAttributeModifier < 0)
-                    labelAttibuteBonus.Text = character.KeyAttributeModifier.ToString();
+                if (spellcaster.KeyAttributeModifier < 0)
+                    labelAttibuteBonus.Text = spellcaster.KeyAttributeModifier.ToString();
                 else
-                    labelAttibuteBonus.Text = "+" + character.KeyAttributeModifier.ToString();
+                    labelAttibuteBonus.Text = "+" + spellcaster.KeyAttributeModifier.ToString();
 
                 ShowSpellsDC();
                 ShowExtraSpells();
@@ -332,11 +378,18 @@ namespace CharUtil
 
         private void comboBoxLevel_TextChanged(object sender, EventArgs e)
         {
-            ShowSpellsPerDay();
+            if (string.Equals(comboBoxClasses.Text, "Choose a Class"))
+            {
+                MessageBox.Show("Please select a valid class", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                ShowSpellsPerDay();
 
-            bool signal = selector.IsKnownlerOfSpells(character);
-            ShowKnownSpells(signal);
-            ResetKnownSpells(signal);
+                bool signal = selector.IsKnownlerOfSpells(spellcaster);
+                ShowKnownSpells(signal);
+                ResetKnownSpells(signal);
+            }
         }
 
         private void buttonCastLevel0_Click(object sender, EventArgs e)
@@ -427,11 +480,11 @@ namespace CharUtil
 
         private void UpdateCarryCapacities()
         {
-            if(radioButtonKgs.Checked)
+            if (radioButtonKgs.Checked)
                 for (int i = 0; i < carryCapacities.Length; i++)
                     carryCapacities[i].Text = loadCalculator.LoadsKgs[i].ToString("#,0.00");
 
-            else if(radioButtonLbs.Checked)
+            else if (radioButtonLbs.Checked)
                 for (int i = 0; i < carryCapacities.Length; i++)
                     carryCapacities[i].Text = loadCalculator.LoadsLbs[i].ToString("#,0.00");
         }
@@ -451,7 +504,7 @@ namespace CharUtil
 
         private void textBoxStrenghtScore_TextChanged(object sender, EventArgs e)
         {
-            if(textBoxStrenghtScore != null)
+            if (textBoxStrenghtScore != null)
                 CalculateCarryCapacity();
         }
 
@@ -508,12 +561,12 @@ namespace CharUtil
             sizeModifiersCode = 8;
             CalculateCarryCapacity();
         }
-        
+
         private void checkBoxFourLegs_CheckedChanged(object sender, EventArgs e)
         {
             CalculateCarryCapacity();
         }
-       
+
         private void radioButtonKgs_CheckedChanged(object sender, EventArgs e)
         {
             foreach (var item in unityLabels)
@@ -528,11 +581,78 @@ namespace CharUtil
             foreach (var item in unityLabels)
             {
                 item.Text = "Lbs";
-                
+
             }
             UpdateCarryCapacities();
         }
 
         #endregion
+
+        #region Misc tab's related stuff
+        private void AddClassMisc(BaseClass character)
+        {
+            allClasses.Add(character);
+            comboBoxClassesBAB.Items.Add(character.ClassName.ToString());
+        }
+        #endregion
+
+        private void ShowBaseAttackBonus()
+        {
+            string textBAB = "";
+            baseClass.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
+            baseClass.CalculateBaseAttackBonus();
+
+            for (int i = 0; i < baseClass.BaseAttackBonus.Length; i++)
+            {
+                if (baseClass.BaseAttackBonus[i] > 0)
+                {
+                    if ((i < 3) && (baseClass.BaseAttackBonus[i + 1] > 0))
+                        textBAB += "+" + baseClass.BaseAttackBonus[i].ToString() + " / ";
+                    else
+                        textBAB += "+" + baseClass.BaseAttackBonus[i].ToString();
+                }
+            }
+            textBoxBAB.Text = textBAB;
+
+            if (baseClass is Monk)
+            {
+                string textFoB = "";
+                Monk monk = (Monk)baseClass;
+                monk.CalculateFuryOfBlowsBonus();
+
+                textFoB += monk.FuryOfBlowsBonus[0].ToString("+0;-#") + " / ";
+
+                if (monk.CharacterLevel < 9)
+                    textFoB += monk.FuryOfBlowsBonus[1].ToString("+0;-#");
+                else
+                    textFoB += monk.FuryOfBlowsBonus[1].ToString("+0;-#") + " / ";
+
+                for (int i = 2; i < monk.FuryOfBlowsBonus.Length; i++)
+                {
+                    if (monk.FuryOfBlowsBonus[i] > 0)
+                    {
+                        if ((i < 4) && (monk.FuryOfBlowsBonus[i + 1] > 0))
+                            textFoB += monk.FuryOfBlowsBonus[i].ToString("+#;-#;0") + " / ";
+                        else
+                            textFoB += monk.FuryOfBlowsBonus[i].ToString("+#;-#;0");
+                    }
+                }
+                textBoxMonkFoB.Text = textFoB;
+            }
+        }
+
+        private void comboBoxClassesBAB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            baseClass = allClasses.Find(x => x.ClassName == comboBoxClassesBAB.Text.ToString());
+            ShowBaseAttackBonus();
+        }
+
+        private void comboBoxLevelBAB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.Equals(comboBoxClassesBAB.Text, "Choose a Class"))
+                MessageBox.Show("Please select a valid class", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+                ShowBaseAttackBonus();
+        }
     }
 }
