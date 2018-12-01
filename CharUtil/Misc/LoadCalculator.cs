@@ -4,8 +4,18 @@ namespace CharUtil
 {
     public class LoadCalculator
     {
+        private const double ONE = 1;
+        private const double TWO = 2;
+        private const double THREE = 3;
+        private const double FOUR = 4;
+        private const double SIX = 6;
+        private const double EIGHT = 8;
+        private const double TWELVE = 12;
+        private const double SIXTEEN = 16;
+        private const double TWENTY_FOUR = 24;
+
         public double[] LoadsLbs { get; }
-        public double[] LoadsKgs { get; }
+        public double[] LoadsKgs { get; }        
 
         public LoadCalculator()
         {
@@ -54,26 +64,26 @@ namespace CharUtil
             double[] sizeConstants = new double[18];
 
             // 0 to 8 = biped creature
-            sizeConstants[0] = 0.125;   // Fine size (Minúsculo)
-            sizeConstants[1] = 0.25;    // Diminutive size (Diminuto)
-            sizeConstants[2] = 0.5;     // Tiny size (Miúdo)
-            sizeConstants[3] = 0.75;    // Small size (Pequeno)
-            sizeConstants[4] = 1;       // Medium size (Médio)
-            sizeConstants[5] = 2;       // Large size (Grande)
-            sizeConstants[6] = 4;       // Huge size (Enorme)
-            sizeConstants[7] = 8;       // Gargantuan size (Imenso)
-            sizeConstants[8] = 16;      // Colossal size (Colossal)
+            sizeConstants[0] = ONE / EIGHT;     // Fine size (Minúsculo)
+            sizeConstants[1] = ONE / FOUR;      // Diminutive size (Diminuto)
+            sizeConstants[2] = ONE / TWO;       // Tiny size (Miúdo)
+            sizeConstants[3] = THREE / FOUR;    // Small size (Pequeno)
+            sizeConstants[4] = ONE;             // Medium size (Médio)
+            sizeConstants[5] = TWO;             // Large size (Grande)
+            sizeConstants[6] = FOUR;            // Huge size (Enorme)
+            sizeConstants[7] = EIGHT;           // Gargantuan size (Imenso)
+            sizeConstants[8] = SIXTEEN;         // Colossal size (Colossal)
 
             // 9 to 17 = quadruped creature
-            sizeConstants[9] = 0.25;    // Fine size (Minúsculo)
-            sizeConstants[10] = 0.5;    // Diminutive size (Diminuto)
-            sizeConstants[11] = 0.75;   // Tiny size (Miúdo)
-            sizeConstants[12] = 1;      // Small size (Pequeno)
-            sizeConstants[13] = 1.5;    // Medium size (Médio)
-            sizeConstants[14] = 3;      // Large size (Grande)
-            sizeConstants[15] = 6;      // Huge size (Enorme)
-            sizeConstants[16] = 12;     // Gargantuan size (Imenso)
-            sizeConstants[17] = 24;     // Colossal size (Colossal)
+            sizeConstants[9] = ONE / FOUR;      // Fine size (Minúsculo)
+            sizeConstants[10] = ONE / TWO;      // Diminutive size (Diminuto)
+            sizeConstants[11] = THREE / FOUR;   // Tiny size (Miúdo)
+            sizeConstants[12] = ONE;            // Small size (Pequeno)
+            sizeConstants[13] = THREE / TWO;    // Medium size (Médio)
+            sizeConstants[14] = THREE;          // Large size (Grande)
+            sizeConstants[15] = SIX;            // Huge size (Enorme)
+            sizeConstants[16] = TWELVE;         // Gargantuan size (Imenso)
+            sizeConstants[17] = TWENTY_FOUR;    // Colossal size (Colossal)
 
             if (!hasFourLegs)
                 return sizeConstants[sizeCategory];
