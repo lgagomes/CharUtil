@@ -594,11 +594,10 @@ namespace CharUtil
             allClasses.Add(character);
             comboBoxClassesBAB.Items.Add(character.ClassName.ToString());
         }
-        #endregion
 
         private void ShowBaseAttackBonus()
         {
-            string textBAB = "";
+            StringBuilder textBAB = new StringBuilder();
             baseClass.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
             baseClass.CalculateBaseAttackBonus();
 
@@ -607,37 +606,51 @@ namespace CharUtil
                 if (baseClass.BaseAttackBonus[i] > 0)
                 {
                     if ((i < 3) && (baseClass.BaseAttackBonus[i + 1] > 0))
-                        textBAB += "+" + baseClass.BaseAttackBonus[i].ToString() + " / ";
+                    {
+                        textBAB.Append("+");
+                        textBAB.Append(baseClass.BaseAttackBonus[i]);
+                        textBAB.Append(" / ");
+                    }
                     else
-                        textBAB += "+" + baseClass.BaseAttackBonus[i].ToString();
+                    {
+                        textBAB.Append("+");
+                        textBAB.Append(baseClass.BaseAttackBonus[i]);
+                    }
                 }
             }
-            textBoxBAB.Text = textBAB;
+            textBoxBAB.Text = textBAB.ToString();
 
             if (baseClass is Monk)
             {
-                string textFoB = "";
+                StringBuilder textFoB = new StringBuilder();
                 Monk monk = (Monk)baseClass;
                 monk.CalculateFuryOfBlowsBonus();
 
-                textFoB += monk.FuryOfBlowsBonus[0].ToString("+0;-#") + " / ";
+                textFoB.Append(monk.FuryOfBlowsBonus[0].ToString("+0;-#"));
+                textFoB.Append(" / ");
+                textFoB.Append(monk.FuryOfBlowsBonus[1].ToString("+0;-#"));
 
-                if (monk.CharacterLevel < 9)
-                    textFoB += monk.FuryOfBlowsBonus[1].ToString("+0;-#");
-                else
-                    textFoB += monk.FuryOfBlowsBonus[1].ToString("+0;-#") + " / ";
+                if (monk.CharacterLevel > 9)
+                {
+                    textFoB.Append(" / ");
+                }
 
                 for (int i = 2; i < monk.FuryOfBlowsBonus.Length; i++)
                 {
                     if (monk.FuryOfBlowsBonus[i] > 0)
                     {
                         if ((i < 4) && (monk.FuryOfBlowsBonus[i + 1] > 0))
-                            textFoB += monk.FuryOfBlowsBonus[i].ToString("+#;-#;0") + " / ";
+                        {
+                            textFoB.Append(monk.FuryOfBlowsBonus[i].ToString("+#;-#;0"));
+                            textFoB.Append(" / ");
+                        }
                         else
-                            textFoB += monk.FuryOfBlowsBonus[i].ToString("+#;-#;0");
+                        {
+                            textFoB.Append(monk.FuryOfBlowsBonus[i].ToString("+#;-#;0"));
+                        }
                     }
                 }
-                textBoxMonkFoB.Text = textFoB;
+                textBoxMonkFoB.Text = textFoB.ToString();
             }
         }
 
@@ -654,5 +667,6 @@ namespace CharUtil
             else
                 ShowBaseAttackBonus();
         }
+        #endregion
     }
 }
