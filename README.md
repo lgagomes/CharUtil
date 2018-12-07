@@ -16,4 +16,6 @@ Features (so far):
          - character's number of legs (biped or quadruped)
       
    - Base Attack Bonus, based on level for all classes
+   - Skill points calculation, based on class, level and intelligence score
+   - Class / non-class skill max rank points, based on character level
 
