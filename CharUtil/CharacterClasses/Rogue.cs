@@ -10,6 +10,7 @@ namespace CharUtil
         {
             ClassName = classname;
             CombatantType = 2;
+			SkillClassModifier = 8;
         }
     }
 }

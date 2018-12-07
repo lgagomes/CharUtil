@@ -28,7 +28,9 @@ namespace CharUtil
         private List<Label> unityLabels;
 
         private List<BaseClass> allClasses;
-        private BaseClass baseClass;
+        private BaseClass miscClass;
+
+        private CheckBox[] levelBonusPoints;
 
         public Form1()
         {
@@ -44,7 +46,7 @@ namespace CharUtil
             castButtons = new List<Button>();
             loadCalculator = new LoadCalculator();
             unityLabels = new List<Label>();
-            allClasses = new List<BaseClass>();
+            allClasses = new List<BaseClass>();            
 
             InitializeLevels();
 
@@ -63,6 +65,9 @@ namespace CharUtil
             carryCapacities = new TextBox[8];
             InitializeCarryCapacities();
 
+            levelBonusPoints = new CheckBox[5];
+            InitializeLevelBonusPoints();
+
             InitializeCastButtons();
             CalculateCarryCapacity();
             InitializeUnityLabels();
@@ -70,10 +75,10 @@ namespace CharUtil
 
             #region initialize all classes
             spellcaster = new Spellcaster();
-            selector = new CasterSelector();
+            selector = new CasterSelector();         
 
             Barbarian barbarian = new Barbarian("barbarian");
-            barbarian.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
+            barbarian.CharacterLevel = Convert.ToInt32(comboBoxLevelMisc.Text);
             AddClassMisc(barbarian);
 
             Bard bard = new Bard("Bard");
@@ -96,7 +101,7 @@ namespace CharUtil
             AddClassMisc(druid);
 
             Monk monk = new Monk("monk");
-            monk.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
+            monk.CharacterLevel = Convert.ToInt32(comboBoxLevelMisc.Text);
             AddClassMisc(monk);
 
             Paladin paladin = new Paladin("Paladin");
@@ -112,7 +117,7 @@ namespace CharUtil
             AddClassMisc(ranger);
 
             Rogue rogue = new Rogue("rogue");
-            rogue.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
+            rogue.CharacterLevel = Convert.ToInt32(comboBoxLevelMisc.Text);
             AddClassMisc(rogue);
 
             Sorcerer sorcerer = new Sorcerer("Sorcerer");
@@ -123,7 +128,7 @@ namespace CharUtil
             AddClassMisc(sorcerer);
 
             Warrior warrior = new Warrior("warrior");
-            warrior.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
+            warrior.CharacterLevel = Convert.ToInt32(comboBoxLevelMisc.Text);
             AddClassMisc(warrior);
 
             Wizard wizard = new Wizard("Wizard");
@@ -142,7 +147,7 @@ namespace CharUtil
             for (int i = 1; i <= 20; i++)
             {
                 comboBoxLevel.Items.Add(i.ToString());
-                comboBoxLevelBAB.Items.Add(i.ToString());
+                comboBoxLevelMisc.Items.Add(i.ToString());
             }
 
         }
@@ -280,9 +285,13 @@ namespace CharUtil
 
         private void ShowSpellsPerDay()
         {
-            int level = Convert.ToInt32(comboBoxLevel.Text);
+            /* TODO: Split this method in 2, one only for load the spells per level
+             * from the XML and another to fill the textBoxes based on character
+             * level */
 
             spellcaster.UpdateSpellsPerDay();
+
+            int level = Convert.ToInt32(comboBoxLevel.Text);
 
             for (int i = 0; i < spellsPerDay.Length; i++)
             {
@@ -589,41 +598,50 @@ namespace CharUtil
         #endregion
 
         #region Misc tab's related stuff
+        private void InitializeLevelBonusPoints()
+        {
+            levelBonusPoints[0] = checkBoxInt4thLevel;
+            levelBonusPoints[1] = checkBoxInt8thLevel;
+            levelBonusPoints[2] = checkBoxInt12thLevel;
+            levelBonusPoints[3] = checkBoxInt16thLevel;
+            levelBonusPoints[4] = checkBoxInt20thLevel;
+        }
+
         private void AddClassMisc(BaseClass character)
         {
             allClasses.Add(character);
-            comboBoxClassesBAB.Items.Add(character.ClassName.ToString());
+            comboBoxClassesMisc.Items.Add(character.ClassName.ToString());
         }
 
-        private void ShowBaseAttackBonus()
+        private void UpdateBaseAttackBonus()
         {
             StringBuilder textBAB = new StringBuilder();
-            baseClass.CharacterLevel = Convert.ToInt32(comboBoxLevelBAB.Text);
-            baseClass.CalculateBaseAttackBonus();
+            miscClass.CharacterLevel = Convert.ToInt32(comboBoxLevelMisc.Text);
+            miscClass.CalculateBaseAttackBonus();
 
-            for (int i = 0; i < baseClass.BaseAttackBonus.Length; i++)
+            for (int i = 0; i < miscClass.BaseAttackBonus.Length; i++)
             {
-                if (baseClass.BaseAttackBonus[i] > 0)
+                if (miscClass.BaseAttackBonus[i] > 0)
                 {
-                    if ((i < 3) && (baseClass.BaseAttackBonus[i + 1] > 0))
+                    if ((i < 3) && (miscClass.BaseAttackBonus[i + 1] > 0))
                     {
                         textBAB.Append("+");
-                        textBAB.Append(baseClass.BaseAttackBonus[i]);
+                        textBAB.Append(miscClass.BaseAttackBonus[i]);
                         textBAB.Append(" / ");
                     }
                     else
                     {
                         textBAB.Append("+");
-                        textBAB.Append(baseClass.BaseAttackBonus[i]);
+                        textBAB.Append(miscClass.BaseAttackBonus[i]);
                     }
                 }
             }
             textBoxBAB.Text = textBAB.ToString();
 
-            if (baseClass is Monk)
+            if (miscClass is Monk)
             {
                 StringBuilder textFoB = new StringBuilder();
-                Monk monk = (Monk)baseClass;
+                Monk monk = (Monk)miscClass;
                 monk.CalculateFuryOfBlowsBonus();
 
                 textFoB.Append(monk.FuryOfBlowsBonus[0].ToString("+0;-#"));
@@ -654,18 +672,135 @@ namespace CharUtil
             }
         }
 
-        private void comboBoxClassesBAB_SelectedIndexChanged(object sender, EventArgs e)
+        private void UpdateLevelBonusPointsCheckboxes()
         {
-            baseClass = allClasses.Find(x => x.ClassName == comboBoxClassesBAB.Text.ToString());
-            ShowBaseAttackBonus();
+            int unlockIndex = Convert.ToInt32(comboBoxLevelMisc.Text) / 4;
+            
+            // enable checkboxes in case of increase the level
+            for (int i = 0; i < unlockIndex; i++)
+            {
+                levelBonusPoints[i].Enabled = true;
+            }
+
+            // in case of decrease the level, disable any ckeckboxes already enabled
+            for (int j = unlockIndex; j < levelBonusPoints.Length; j++)
+            {
+                levelBonusPoints[j].Enabled = false;
+                levelBonusPoints[j].Checked = false;
+            }
         }
 
-        private void comboBoxLevelBAB_SelectedIndexChanged(object sender, EventArgs e)
+        private void UpdateIntelligenceBonuses()
         {
-            if (string.Equals(comboBoxClassesBAB.Text, "Choose a Class"))
+            miscClass.SkillPointsCalculator.IntelligenceBonuses.IntBonus4thLevel = checkBoxInt4thLevel.Checked;
+            miscClass.SkillPointsCalculator.IntelligenceBonuses.IntBonus8thLevel = checkBoxInt8thLevel.Checked;
+            miscClass.SkillPointsCalculator.IntelligenceBonuses.IntBonus12thLevel = checkBoxInt12thLevel.Checked;
+            miscClass.SkillPointsCalculator.IntelligenceBonuses.IntBonus16thLevel = checkBoxInt16thLevel.Checked;
+            miscClass.SkillPointsCalculator.IntelligenceBonuses.IntBonus20thLevel = checkBoxInt20thLevel.Checked;
+        }
+
+        private void UpdateSkillPoints()
+        {
+            miscClass.CharacterLevel = Convert.ToInt32(comboBoxLevelMisc.Text);
+            miscClass.Intelligence = Convert.ToInt32(textBoxIntelligenceScore.Text);
+
+            miscClass.SkillPointsCalculator.ResetSkillPoints();
+            miscClass.UpdateSkillPointsModifiers();
+
+            miscClass.SkillPointsCalculator.CalculateSkillPoints(miscClass.CharacterLevel,
+                    miscClass.GetModifier(miscClass.Intelligence),
+                    miscClass.SkillClassModifier,
+                    checkBoxIsHuman.Checked);
+
+            textBoxSkillPoints.Text = miscClass.SkillPointsCalculator.SkillPoints.ToString();
+        }
+
+        private void UpdateSkillRanks()
+        {
+            miscClass.SkillPointsCalculator.CalculateSkillRanks(miscClass.CharacterLevel);
+
+            textBoxClassSkillMaxRanks.Text = miscClass.SkillPointsCalculator.ClassSkillMaxRanks.ToString();
+            textBoxNonClassSkillMaxRanks.Text = miscClass.SkillPointsCalculator.NonClassSkillMaxRanks.ToString();
+        }
+
+        private void comboBoxClassesMisc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBoxMonkFoB.Text = "";
+            miscClass = allClasses.Find(x => x.ClassName == comboBoxClassesMisc.Text.ToString());
+            miscClass.SkillPointsCalculator = new SkillPointsCalculator();
+            UpdateBaseAttackBonus();
+
+            UpdateLevelBonusPointsCheckboxes();
+            UpdateIntelligenceBonuses();
+            UpdateSkillPoints();
+        }
+
+        private void comboBoxLevelMisc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.Equals(comboBoxClassesMisc.Text, "Choose a Class"))
+            {
                 MessageBox.Show("Please select a valid class", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             else
-                ShowBaseAttackBonus();
+            {
+                UpdateBaseAttackBonus();
+                UpdateLevelBonusPointsCheckboxes();
+                UpdateIntelligenceBonuses();
+                UpdateSkillPoints();
+                UpdateSkillRanks();
+            }
+        }
+
+        private void checkBoxInt4thLevel_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateIntelligenceBonuses();
+            UpdateSkillPoints();
+        }
+
+        private void checkBoxInt8thLevel_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateIntelligenceBonuses();
+            UpdateSkillPoints();
+        }
+
+        private void checkBoxInt12thLevel_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateIntelligenceBonuses();
+            UpdateSkillPoints();
+        }
+
+        private void checkBoxInt16thLevel_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateIntelligenceBonuses();
+            UpdateSkillPoints();
+        }
+
+        private void checkBoxInt20thLevel_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateIntelligenceBonuses();
+            UpdateSkillPoints();
+        }
+
+        private void textBoxIntelligenceScore_TextChanged(object sender, EventArgs e)
+        {
+            if (string.Equals(comboBoxClassesMisc.Text, "Choose a Class"))
+            {
+                MessageBox.Show("Please select a valid class", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (textBoxIntelligenceScore.Text != "")
+            {
+                UpdateSkillPoints();
+            }
+        }
+
+        private void textBoxIntelligenceScore_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void checkBoxIsHuman_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateSkillPoints();
         }
         #endregion
     }

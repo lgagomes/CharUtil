@@ -9,6 +9,7 @@
             FirstDC = 0;
             KeyAttribute = "Intelligence";
             CombatantType = 3;
+			SkillClassModifier = 2;
         }
     }
 }

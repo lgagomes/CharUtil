@@ -12,7 +12,10 @@ namespace CharUtil
         public int Intelligence { get; set; }
         public int Wisdom { get; set; }
         public double[] BaseAttackBonus { get; set; }
-        public int CombatantType { get; set; }
+        public int CombatantType { get; set; }		
+		public int SkillClassModifier { get; set; } // how much each class adds to skill points calculations
+		public SkillPointsCalculator SkillPointsCalculator;       
+        
         /*
          * Combatant types:
          *  1 = Full combatants: barbarians, warriors, paladins, rangers
@@ -78,6 +81,15 @@ namespace CharUtil
                 return 0;
         }
 
+		public void UpdateSkillPointsModifiers()
+        {
+            this.SkillPointsCalculator.IntelligenceBonuses.IntBonus4thLevelValue = this.GetModifier(this.Intelligence + 1);
+            this.SkillPointsCalculator.IntelligenceBonuses.IntBonus8thLevelValue = this.GetModifier(this.Intelligence + 2);
+            this.SkillPointsCalculator.IntelligenceBonuses.IntBonus12thLevelValue = this.GetModifier(this.Intelligence + 3);
+            this.SkillPointsCalculator.IntelligenceBonuses.IntBonus16thLevelValue = this.GetModifier(this.Intelligence + 4);
+            this.SkillPointsCalculator.IntelligenceBonuses.IntBonus20thLevelValue = this.GetModifier(this.Intelligence + 5);
+        }
+		
         #endregion
     }
 }
