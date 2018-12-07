@@ -67,7 +67,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\CasterSelector.cs" />
+    <Compile Include="Misc\IntelligenceBonuses.cs" />
     <Compile Include="Misc\LoadCalculator.cs" />
+    <Compile Include="Misc\SkillPointsCalculator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

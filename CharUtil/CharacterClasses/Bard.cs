@@ -9,6 +9,7 @@
             FirstDC = 0;
             KeyAttribute = "Charisma";
             CombatantType = 2;
+			SkillClassModifier = 6;
         }
     }
 }

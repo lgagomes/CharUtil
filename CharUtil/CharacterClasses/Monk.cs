@@ -13,6 +13,7 @@ namespace CharUtil
             ClassName = classname;
             CombatantType = 2;
             FuryOfBlowsBonus = new double[5];
+			SkillClassModifier = 4;
         }
 
         public void CalculateFuryOfBlowsBonus()
