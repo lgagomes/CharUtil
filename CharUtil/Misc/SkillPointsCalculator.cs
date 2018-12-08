@@ -32,8 +32,10 @@ namespace CharUtil
             int humanBonusFirstLevel = isHuman ? 4 : 0; // if is human, gains an additional 4 points in 1st level
             HumanBonusNextLevels = isHuman ? 1 : 0; // and an additional point each level            
 
-            CheckIntelligenceModifiers();
-
+            // In case of a negative modifier
+            if (IntelligenceModifier < 0)
+                IntelligenceModifier = 1;
+            
             //1st level
             SkillPoints = ((ClassModifier + IntelligenceModifier) * 4) + humanBonusFirstLevel;
 
@@ -59,31 +61,7 @@ namespace CharUtil
                     IncrementSkillPoints();
             }
         }
-
-        private void CheckIntelligenceModifiers()
-        {
-            List<int> listOfModifiers = new List<int>
-            {
-                IntelligenceModifier,
-                IntelligenceBonuses.IntBonus4thLevelValue,
-                IntelligenceBonuses.IntBonus8thLevelValue,
-                IntelligenceBonuses.IntBonus12thLevelValue,
-                IntelligenceBonuses.IntBonus16thLevelValue,
-                IntelligenceBonuses.IntBonus20thLevelValue
-            };
-
-            /* By PHB, any character with negative intelligence modifier receives at 
-             * least 4 points (1 * 4) in the first level and 1 point in subsequent levels. 
-             * By doing the intelligence bonuses used here equals to 'ClassModifier' - 1, 
-             * we don't need to write a special case, just reuse the same formula */
-
-            for (int i = 0; i < listOfModifiers.Count; i++)
-            {
-                if (listOfModifiers[i] < 0)
-                    listOfModifiers[i] = ClassModifier - 1;
-            }
-        }
-
+        
         // default
         private void IncrementSkillPoints()
         {
@@ -93,6 +71,10 @@ namespace CharUtil
         // if additional points where put into intelligence
         private void IncrementSkillPoints(int specialIntelligenceModifier)
         {
+            // In case of a negative modifier
+            if (specialIntelligenceModifier < 0)
+                specialIntelligenceModifier = 1;
+
             SkillPoints += (ClassModifier + specialIntelligenceModifier + HumanBonusNextLevels);
         }
 
