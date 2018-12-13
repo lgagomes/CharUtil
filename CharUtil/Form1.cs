@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CharUtil
@@ -32,6 +28,8 @@ namespace CharUtil
 
         private CheckBox[] levelBonusPoints;
 
+        private XPCalculator xpCalculator;
+
         public Form1()
         {
             InitializeComponent();
@@ -46,7 +44,8 @@ namespace CharUtil
             castButtons = new List<Button>();
             loadCalculator = new LoadCalculator();
             unityLabels = new List<Label>();
-            allClasses = new List<BaseClass>();            
+            allClasses = new List<BaseClass>();
+            xpCalculator = new XPCalculator();
 
             InitializeLevels();
 
@@ -723,6 +722,32 @@ namespace CharUtil
             textBoxNonClassSkillMaxRanks.Text = miscClass.SkillPointsCalculator.NonClassSkillMaxRanks.ToString();
         }
 
+        private void UpdateLevelAfterXPGain()
+        {
+            textBoxLevelAfterXP.Text = (xpCalculator.CalculateLevelBySumXP(
+                                    Convert.ToInt64(textBoxActualXP.Text),
+                                    Convert.ToInt64(textBoxReceivedXP.Text))).ToString();
+        }
+
+        private void CheckEpicLevel()
+        {
+            // https://stackoverflow.com/a/20688985
+
+            if (Convert.ToInt64(textBoxLevelAfterXP.Text) > 20)
+                textBoxLevelAfterXP.ForeColor = Color.Blue;
+            else
+                textBoxLevelAfterXP.ForeColor = Color.Black;
+
+            textBoxLevelAfterXP.BackColor = textBoxLevelAfterXP.BackColor;
+        }
+
+        private void UpdateTotalXP()
+        {
+            textBoxTotalXP.Text = (
+                Convert.ToInt64(textBoxActualXP.Text) +
+                Convert.ToInt64(textBoxReceivedXP.Text)).ToString();
+        }
+
         private void comboBoxClassesMisc_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxMonkFoB.Text = "";
@@ -801,6 +826,42 @@ namespace CharUtil
         private void checkBoxIsHuman_CheckedChanged(object sender, EventArgs e)
         {
             UpdateSkillPoints();
+        }
+       
+        private void textBoxActualXP_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxActualXP.Text != "")
+            {
+                UpdateLevelAfterXPGain();
+                UpdateTotalXP();
+                CheckEpicLevel();
+            }
+        }
+
+        private void textBoxActualXP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void textBoxReceivedXP_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxReceivedXP.Text != "")
+            {
+                UpdateLevelAfterXPGain();
+                UpdateTotalXP();
+                CheckEpicLevel();
+            }
+        }       
+
+        private void textBoxReceivedXP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+        
+        private void buttonXPProgression_Click(object sender, EventArgs e)
+        {
+            FormXpProgression formXpProgression = new FormXpProgression();
+            formXpProgression.ShowDialog();
         }
         #endregion
     }

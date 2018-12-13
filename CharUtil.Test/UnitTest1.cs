@@ -530,5 +530,72 @@ namespace XUnitSpellcasters
             // Assert
             Assert.Equal(template, monk.FuryOfBlowsBonus);
         }
+
+        [Fact]
+        public void TestCalculateXPByLevel()
+        {
+            // Arrange
+            XPCalculator xpCalculator = new XPCalculator();
+            long expectedXP = 66000,
+                actualXP,
+                level = 12;
+
+            // Act
+            actualXP = xpCalculator.CalculateXPByLevel(level);
+
+            // Assert
+            Assert.Equal(expectedXP, actualXP);
+        }
+
+        [Fact]
+        public void TestCalculateLevelByXP()
+        {
+            // Arrange
+            XPCalculator xpCalculator = new XPCalculator();
+            long xp = 119999;
+            long expectedLevel = 15;
+            long actualLevel;
+
+            // Act
+            actualLevel = xpCalculator.CalculateLevelByXP(xp);
+
+            // Assert
+            Assert.Equal(expectedLevel, actualLevel);
+        }
+
+        [Fact]
+        public void TestCalculateLevelBySumXP()
+        {
+            // Arrange
+            XPCalculator xpCalculator = new XPCalculator();
+            long xpAmmount1 = 36000;
+            long xpAmmount2 = 78000;
+            long actualLevel;
+            long expectedLevel = 15;
+
+            // Act
+            actualLevel = xpCalculator.CalculateLevelBySumXP(xpAmmount1, xpAmmount2);
+
+            // Assert
+            Assert.Equal(expectedLevel, actualLevel);
+        }
+
+        //[Fact] // Must change the visibility of XPCalculator.GetDelta() to public
+        //public void TestGetDelta()
+        //{
+        //    
+
+        //    // Arrange
+        //    XPCalculator xpCalculator = new XPCalculator();
+        //    int a = 1, b = -5, c = 6;
+        //    int expectedDelta = 1;
+        //    int actualDelta;
+
+        //    // Act
+        //    actualDelta = xpCalculator.GetDelta(a, b, c);
+
+        //    // Assert
+        //    Assert.Equal(expectedDelta, actualDelta);
+        //}
     }
 }

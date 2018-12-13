@@ -117,35 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label47.Text" xml:space="preserve">
-    <value>*Only applicable to a monk who doesn't
-wear any armor. Also, when using Flurry
-of Blows, a monk may attack only with 
-unarmed strikes or with special monk 
-weapons (kama, nunchaku, quarterstaff, 
-sai, shuriken, and siangham).</value>
-  </data>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="bindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJdSURBVDhPjZHtS1NhGMZvyxx+2QejPvilQKM3gig1Gpm9
-        iEUYpWEvhgsta1mBoW6OcutFQwhxSFgm2SzQhiMxzHTN6RQjtQ9R0gvLqf+AsWWDgu3quZ9zFIUJXfCD
-        +7mv63rO4RyKpkgkohGsFSQLNqizRrWXF4DYn3Nz2998mHnSMeybejDg/8Pw3DM+3cIeZ9T4UrHRM+a/
-        ePfp6C9b13fUOL4sgXfVwut+/+NS1Euqnw3qzzYNhCtbP6LSrtDa75fMn9nTNw+E79gH9WpNUbyuIjHD
-        2BG4+mgM85Q+HkU4EpHwvNjLMDoDqzMrEtU60ap0c21BnRfn6ocXKKgbQueIX8LzYq/QNgxN+o1atU4x
-        icfvT5y458E8OTX9cAxN4gXjnZTnxT6zPq9+grtEW/Li1p1qCGVV9UJi6UOmxYUWt098K0UHLW+Rdcst
-        Pc4csvRis74xxF2i5MMabVZ9SFf+CjpjN3RmF3Q3PUgzu9U6sKfKg323vUgz9WJTiRNr8u2g/dYQd8Vb
-        WFfQXuu32GPNiD/TDm1RFxIuu5Bg6EMwGEQgEEBcYQ9I/xp02gnKfQ7KbgJ3ZFcqtcxGOeLWkw5QQTfo
-        ggd03oPZ2VkJFfUrO/Y4k9MKSi23KWXW1uIkOtIwR/mdoEIXqNgLU9vnhQtMbZ/EblDxOMPZHdeS1Laq
-        naUGOtAelk8yvIPJ6YPp5bRgCqYOn9iNKG/BGc5GUQylXC+hXPtvujIOKvsKMs8o8Mw79jgjf99y2mbY
-        SLuMD+lo4zRlO/5KeN4tdinC+3/lrRS/SSvhOaqI/gHgasetySgbgQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>43</value>
   </metadata>
 </root>

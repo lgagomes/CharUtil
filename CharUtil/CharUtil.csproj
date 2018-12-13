@@ -66,14 +66,25 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormXpProgression.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormXpProgression.Designer.cs">
+      <DependentUpon>FormXpProgression.cs</DependentUpon>
+    </Compile>
     <Compile Include="Misc\CasterSelector.cs" />
     <Compile Include="Misc\IntelligenceBonuses.cs" />
     <Compile Include="Misc\LoadCalculator.cs" />
     <Compile Include="Misc\SkillPointsCalculator.cs" />
+    <Compile Include="Misc\XPCalculator.cs" />
+    <Compile Include="Misc\XpPerLevelHolder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormXpProgression.resx">
+      <DependentUpon>FormXpProgression.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
