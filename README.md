@@ -18,4 +18,5 @@ Features (so far):
    - Base Attack Bonus, based on level for all classes
    - Skill points calculation, based on class, level and intelligence score
    - Class / non-class skill max rank points, based on character level
+   - XP calculation for character level up (NOT  Challenge Rating (CR) / Encounter calculation).
 
