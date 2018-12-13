@@ -1,4 +1,6 @@
-﻿namespace CharUtil
+﻿using System.Collections.Generic;
+
+namespace CharUtil
 {
     public class IntelligenceBonuses
     {

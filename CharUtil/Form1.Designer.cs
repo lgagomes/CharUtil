@@ -171,7 +171,21 @@
             this.label36 = new System.Windows.Forms.Label();
             this.textBoxStrenghtScore = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label54 = new System.Windows.Forms.Label();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.buttonXPProgression = new System.Windows.Forms.Button();
+            this.label60 = new System.Windows.Forms.Label();
+            this.textBoxLevelAfterXP = new System.Windows.Forms.TextBox();
+            this.textBoxTotalXP = new System.Windows.Forms.TextBox();
+            this.textBoxReceivedXP = new System.Windows.Forms.TextBox();
+            this.textBoxActualXP = new System.Windows.Forms.TextBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.checkBoxIsHuman = new System.Windows.Forms.CheckBox();
             this.textBoxNonClassSkillMaxRanks = new System.Windows.Forms.TextBox();
             this.textBoxClassSkillMaxRanks = new System.Windows.Forms.TextBox();
             this.checkBoxInt20thLevel = new System.Windows.Forms.CheckBox();
@@ -186,6 +200,8 @@
             this.label48 = new System.Windows.Forms.Label();
             this.textBoxSkillPoints = new System.Windows.Forms.TextBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.textBoxIntelligenceScore = new System.Windows.Forms.TextBox();
+            this.label53 = new System.Windows.Forms.Label();
             this.comboBoxClassesMisc = new System.Windows.Forms.ComboBox();
             this.label43 = new System.Windows.Forms.Label();
             this.comboBoxLevelMisc = new System.Windows.Forms.ComboBox();
@@ -198,9 +214,6 @@
             this.label45 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.label53 = new System.Windows.Forms.Label();
-            this.textBoxIntelligenceScore = new System.Windows.Forms.TextBox();
-            this.checkBoxIsHuman = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -216,6 +229,7 @@
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.groupBox14.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -1796,6 +1810,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label54);
+            this.tabPage3.Controls.Add(this.groupBox14);
             this.tabPage3.Controls.Add(this.groupBox13);
             this.tabPage3.Controls.Add(this.groupBox12);
             this.tabPage3.Controls.Add(this.groupBox11);
@@ -1805,6 +1821,137 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Misc.";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(0, 0);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(41, 13);
+            this.label54.TabIndex = 15;
+            this.label54.Text = "label54";
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.buttonXPProgression);
+            this.groupBox14.Controls.Add(this.label60);
+            this.groupBox14.Controls.Add(this.textBoxLevelAfterXP);
+            this.groupBox14.Controls.Add(this.textBoxTotalXP);
+            this.groupBox14.Controls.Add(this.textBoxReceivedXP);
+            this.groupBox14.Controls.Add(this.textBoxActualXP);
+            this.groupBox14.Controls.Add(this.label59);
+            this.groupBox14.Controls.Add(this.label58);
+            this.groupBox14.Controls.Add(this.label57);
+            this.groupBox14.Controls.Add(this.label56);
+            this.groupBox14.Controls.Add(this.label55);
+            this.groupBox14.Location = new System.Drawing.Point(12, 438);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(525, 172);
+            this.groupBox14.TabIndex = 14;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "XP Calculator";
+            // 
+            // buttonXPProgression
+            // 
+            this.buttonXPProgression.Location = new System.Drawing.Point(287, 131);
+            this.buttonXPProgression.Name = "buttonXPProgression";
+            this.buttonXPProgression.Size = new System.Drawing.Size(153, 23);
+            this.buttonXPProgression.TabIndex = 10;
+            this.buttonXPProgression.Text = "Show XP progression table";
+            this.buttonXPProgression.UseVisualStyleBackColor = true;
+            this.buttonXPProgression.Click += new System.EventHandler(this.buttonXPProgression_Click);
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(6, 128);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(252, 26);
+            this.label60.TabIndex = 9;
+            this.label60.Text = "Or click on the \"Show XP progression table\" button \r\nto show the complete XP prog" +
+    "ression table";
+            // 
+            // textBoxLevelAfterXP
+            // 
+            this.textBoxLevelAfterXP.Location = new System.Drawing.Point(381, 82);
+            this.textBoxLevelAfterXP.Name = "textBoxLevelAfterXP";
+            this.textBoxLevelAfterXP.ReadOnly = true;
+            this.textBoxLevelAfterXP.Size = new System.Drawing.Size(59, 20);
+            this.textBoxLevelAfterXP.TabIndex = 8;
+            // 
+            // textBoxTotalXP
+            // 
+            this.textBoxTotalXP.Location = new System.Drawing.Point(364, 47);
+            this.textBoxTotalXP.Name = "textBoxTotalXP";
+            this.textBoxTotalXP.ReadOnly = true;
+            this.textBoxTotalXP.Size = new System.Drawing.Size(76, 20);
+            this.textBoxTotalXP.TabIndex = 7;
+            // 
+            // textBoxReceivedXP
+            // 
+            this.textBoxReceivedXP.Location = new System.Drawing.Point(148, 82);
+            this.textBoxReceivedXP.Name = "textBoxReceivedXP";
+            this.textBoxReceivedXP.Size = new System.Drawing.Size(76, 20);
+            this.textBoxReceivedXP.TabIndex = 6;
+            this.textBoxReceivedXP.Text = "0";
+            this.textBoxReceivedXP.TextChanged += new System.EventHandler(this.textBoxReceivedXP_TextChanged);
+            this.textBoxReceivedXP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxReceivedXP_KeyPress);
+            // 
+            // textBoxActualXP
+            // 
+            this.textBoxActualXP.Location = new System.Drawing.Point(148, 47);
+            this.textBoxActualXP.Name = "textBoxActualXP";
+            this.textBoxActualXP.Size = new System.Drawing.Size(76, 20);
+            this.textBoxActualXP.TabIndex = 5;
+            this.textBoxActualXP.Text = "0";
+            this.textBoxActualXP.TextChanged += new System.EventHandler(this.textBoxActualXP_TextChanged);
+            this.textBoxActualXP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxActualXP_KeyPress);
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(245, 85);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(130, 13);
+            this.label59.TabIndex = 4;
+            this.label59.Text = "Current level after XP gain";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(245, 52);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(48, 13);
+            this.label58.TabIndex = 3;
+            this.label58.Text = "Total XP";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(70, 85);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(70, 13);
+            this.label57.TabIndex = 2;
+            this.label57.Text = "Received XP";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(70, 50);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(54, 13);
+            this.label56.TabIndex = 1;
+            this.label56.Text = "Actual XP";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(5, 19);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(486, 13);
+            this.label55.TabIndex = 0;
+            this.label55.Text = "Inform how much XP do you have and the ammount of XP gained to find out what your" +
+    " current level is";
             // 
             // groupBox13
             // 
@@ -1828,6 +1975,17 @@
             this.groupBox13.TabIndex = 13;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Skill Points";
+            // 
+            // checkBoxIsHuman
+            // 
+            this.checkBoxIsHuman.AutoSize = true;
+            this.checkBoxIsHuman.Location = new System.Drawing.Point(6, 46);
+            this.checkBoxIsHuman.Name = "checkBoxIsHuman";
+            this.checkBoxIsHuman.Size = new System.Drawing.Size(202, 17);
+            this.checkBoxIsHuman.TabIndex = 14;
+            this.checkBoxIsHuman.Text = "Check this if your character is Human";
+            this.checkBoxIsHuman.UseVisualStyleBackColor = true;
+            this.checkBoxIsHuman.CheckedChanged += new System.EventHandler(this.checkBoxIsHuman_CheckedChanged);
             // 
             // textBoxNonClassSkillMaxRanks
             // 
@@ -1976,6 +2134,25 @@
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Inputs";
             // 
+            // textBoxIntelligenceScore
+            // 
+            this.textBoxIntelligenceScore.Location = new System.Drawing.Point(477, 23);
+            this.textBoxIntelligenceScore.Name = "textBoxIntelligenceScore";
+            this.textBoxIntelligenceScore.Size = new System.Drawing.Size(36, 20);
+            this.textBoxIntelligenceScore.TabIndex = 13;
+            this.textBoxIntelligenceScore.Text = "10";
+            this.textBoxIntelligenceScore.TextChanged += new System.EventHandler(this.textBoxIntelligenceScore_TextChanged);
+            this.textBoxIntelligenceScore.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxIntelligenceScore_KeyPress);
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(376, 26);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(92, 13);
+            this.label53.TabIndex = 12;
+            this.label53.Text = "Intelligence Score";
+            // 
             // comboBoxClassesMisc
             // 
             this.comboBoxClassesMisc.FormattingEnabled = true;
@@ -2056,7 +2233,7 @@
             // 
             // textBoxBAB
             // 
-            this.textBoxBAB.Location = new System.Drawing.Point(109, 28);
+            this.textBoxBAB.Location = new System.Drawing.Point(156, 28);
             this.textBoxBAB.Name = "textBoxBAB";
             this.textBoxBAB.ReadOnly = true;
             this.textBoxBAB.Size = new System.Drawing.Size(153, 20);
@@ -2090,36 +2267,6 @@
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "About";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(376, 26);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(92, 13);
-            this.label53.TabIndex = 12;
-            this.label53.Text = "Intelligence Score";
-            // 
-            // textBoxIntelligenceScore
-            // 
-            this.textBoxIntelligenceScore.Location = new System.Drawing.Point(477, 23);
-            this.textBoxIntelligenceScore.Name = "textBoxIntelligenceScore";
-            this.textBoxIntelligenceScore.Size = new System.Drawing.Size(36, 20);
-            this.textBoxIntelligenceScore.TabIndex = 13;
-            this.textBoxIntelligenceScore.Text = "10";
-            this.textBoxIntelligenceScore.TextChanged += new System.EventHandler(this.textBoxIntelligenceScore_TextChanged);
-            this.textBoxIntelligenceScore.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxIntelligenceScore_KeyPress);
-            // 
-            // checkBoxIsHuman
-            // 
-            this.checkBoxIsHuman.AutoSize = true;
-            this.checkBoxIsHuman.Location = new System.Drawing.Point(6, 46);
-            this.checkBoxIsHuman.Name = "checkBoxIsHuman";
-            this.checkBoxIsHuman.Size = new System.Drawing.Size(183, 17);
-            this.checkBoxIsHuman.TabIndex = 14;
-            this.checkBoxIsHuman.Text = "Check if your character is Human";
-            this.checkBoxIsHuman.UseVisualStyleBackColor = true;
-            this.checkBoxIsHuman.CheckedChanged += new System.EventHandler(this.checkBoxIsHuman_CheckedChanged);
             // 
             // Form1
             // 
@@ -2157,6 +2304,9 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox14.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
             this.groupBox12.ResumeLayout(false);
@@ -2344,6 +2494,19 @@
         private System.Windows.Forms.TextBox textBoxIntelligenceScore;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.CheckBox checkBoxIsHuman;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.TextBox textBoxLevelAfterXP;
+        private System.Windows.Forms.TextBox textBoxTotalXP;
+        private System.Windows.Forms.TextBox textBoxReceivedXP;
+        private System.Windows.Forms.TextBox textBoxActualXP;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Button buttonXPProgression;
+        private System.Windows.Forms.Label label60;
     }
 }
 
