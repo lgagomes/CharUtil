@@ -1,0 +1,15 @@
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\bin\Debug\netcoreapp2.1\TesterDriver.deps.json
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\bin\Debug\netcoreapp2.1\TesterDriver.runtimeconfig.json
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\bin\Debug\netcoreapp2.1\TesterDriver.runtimeconfig.dev.json
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\bin\Debug\netcoreapp2.1\TesterDriver.dll
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\bin\Debug\netcoreapp2.1\TesterDriver.pdb
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\obj\Debug\netcoreapp2.1\TesterDriver.csprojAssemblyReference.cache
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\obj\Debug\netcoreapp2.1\TesterDriver.csproj.CoreCompileInputs.cache
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\obj\Debug\netcoreapp2.1\TesterDriver.AssemblyInfoInputs.cache
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\obj\Debug\netcoreapp2.1\TesterDriver.AssemblyInfo.cs
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\obj\Debug\netcoreapp2.1\TesterDriver.dll
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\obj\Debug\netcoreapp2.1\TesterDriver.pdb
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\bin\Debug\netcoreapp2.1\CharUtil.exe
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\bin\Debug\netcoreapp2.1\CharUtil.pdb
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\bin\Debug\netcoreapp2.1\CharUtil.exe.config
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\TesterDriver\obj\Debug\netcoreapp2.1\TesterDriver.csproj.CopyComplete

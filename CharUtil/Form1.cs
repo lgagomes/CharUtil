@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -30,6 +31,9 @@ namespace CharUtil
 
         private XPCalculator xpCalculator;
 
+        private DiceRollerManager diceRollerManager;
+        private int modifierSignal;
+
         public Form1()
         {
             InitializeComponent();
@@ -46,6 +50,7 @@ namespace CharUtil
             unityLabels = new List<Label>();
             allClasses = new List<BaseClass>();
             xpCalculator = new XPCalculator();
+            diceRollerManager = new DiceRollerManager();
 
             InitializeLevels();
 
@@ -70,6 +75,7 @@ namespace CharUtil
             InitializeCastButtons();
             CalculateCarryCapacity();
             InitializeUnityLabels();
+
             #endregion
 
             #region initialize all classes
@@ -160,6 +166,11 @@ namespace CharUtil
                 "With no intention to replace the books for full descriptions, " +
                 "but rather to be a tool to ease the character creation.",
                 "About", MessageBoxButtons.OK);
+        }
+
+        private void TextBoxKeyPressCommon(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
         #endregion
@@ -359,11 +370,6 @@ namespace CharUtil
             buttonRegainSpells.Enabled = true;
         }
 
-        private void textBoxKeyAttribute_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
-
         private void textBoxKeyAttribute_TextChanged(object sender, EventArgs e)
         {
             if (string.Equals(comboBoxClasses.Text, "Choose a Class"))
@@ -503,11 +509,6 @@ namespace CharUtil
                                         sizeModifiersCode,
                                         checkBoxFourLegs.Checked);
             UpdateCarryCapacities();
-        }
-
-        private void textBoxStrenghtScore_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
         private void textBoxStrenghtScore_TextChanged(object sender, EventArgs e)
@@ -818,11 +819,6 @@ namespace CharUtil
             }
         }
 
-        private void textBoxIntelligenceScore_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
-
         private void checkBoxIsHuman_CheckedChanged(object sender, EventArgs e)
         {
             UpdateSkillPoints();
@@ -838,11 +834,6 @@ namespace CharUtil
             }
         }
 
-        private void textBoxActualXP_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
-
         private void textBoxReceivedXP_TextChanged(object sender, EventArgs e)
         {
             if (textBoxReceivedXP.Text != "")
@@ -853,15 +844,183 @@ namespace CharUtil
             }
         }       
 
-        private void textBoxReceivedXP_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
-        
         private void buttonXPProgression_Click(object sender, EventArgs e)
         {
             FormXpProgression formXpProgression = new FormXpProgression();
             formXpProgression.ShowDialog();
+        }
+        #endregion
+
+        #region dice roller tab's related stuff
+
+        private void ExtractNumberOfDiceFaces(string diceInfo)
+        {
+            if(diceInfo.Length == 8)
+                diceRollerManager.NumberOfDiceFaces = (int)char.GetNumericValue(diceInfo[diceInfo.Length - 1]);
+            else
+            {
+                StringBuilder digits = new StringBuilder();
+                digits.Append(diceInfo[diceInfo.Length - 2]);
+                digits.Append(diceInfo[diceInfo.Length - 1]);
+
+                int.TryParse(digits.ToString(), out int result);
+                diceRollerManager.NumberOfDiceFaces = result;
+            }
+        }
+
+        private void UpdateDiceType(object sender, EventArgs e)
+        {
+            labelCustomDice.Visible = false;
+            textBoxCustomDice.Visible = false;
+            textBoxDiceRollModifier.ReadOnly = false;
+
+            Button buttonSender = sender as Button;
+            labelDiceType.Text = buttonSender.Text;
+
+            ExtractNumberOfDiceFaces(buttonSender.Name);
+        }
+
+        private void ShowRollResults()
+        {
+            PrintRollHeader();
+            PrintRolls();
+        }
+
+        private void PrintRollHeader()
+        {
+            StringBuilder rollSummary = new StringBuilder();
+
+            rollSummary.AppendFormat("Rolling {0}", textBoxNumberOfDices.Text);
+
+            if (string.Equals(labelDiceType.Text, "Custom Dice"))
+                rollSummary.AppendFormat("d{0}", textBoxCustomDice.Text);
+            else
+                rollSummary.Append(labelDiceType.Text);
+
+            rollSummary.AppendFormat("{0}{1}...", comboBoxModifierSignal.Text, textBoxDiceRollModifier.Text);
+            rollSummary.Append(Environment.NewLine);
+
+            textBoxRollResults.Text += rollSummary;
+        }
+
+        private void PrintRolls()
+        {
+            StringBuilder rollsResult = new StringBuilder();
+            if (radioButtonAfterRolls.Checked)
+            {
+                int i = 0;
+                foreach (var roll in diceRollerManager.Rolls)
+                {
+                    rollsResult.Append(roll);
+                    if (i < diceRollerManager.Rolls.Count - 1)
+                    {
+                        rollsResult.Append(" + ");
+                    }
+                    else
+                    {
+                        rollsResult.AppendFormat(" {0} ", comboBoxModifierSignal.Text);
+                    }
+                    i++;
+                }
+                rollsResult.AppendFormat("{0} = {1}{2}", Math.Abs(diceRollerManager.Modifier), diceRollerManager.TotalRolledValues, Environment.NewLine);
+            }
+            else if (radioButtonEachRoll.Checked)
+            {
+                int j = 0;
+                foreach (var roll in diceRollerManager.Rolls)
+                {
+                    rollsResult.Append(roll);
+                    if (j < diceRollerManager.Rolls.Count - 1)
+                    {
+                        rollsResult.AppendFormat(" {0} {1} {0} ", comboBoxModifierSignal.Text, Math.Abs(diceRollerManager.Modifier));
+                    }
+                    else
+                    {
+                        rollsResult.AppendFormat(" {0} {1} ", comboBoxModifierSignal.Text, Math.Abs(diceRollerManager.Modifier));
+                    }
+                    j++;
+                }
+                rollsResult.AppendFormat("= {0}", diceRollerManager.TotalRolledValues);
+            }
+            rollsResult.AppendFormat("{0}{0}", Environment.NewLine);
+            textBoxRollResults.Text += rollsResult;
+        }
+
+        private void buttonCustomDice_Click(object sender, EventArgs e)
+        {
+            labelDiceType.Text = "Custom Dice";
+            labelCustomDice.Visible = true;
+            textBoxCustomDice.Visible = true;
+            textBoxDiceRollModifier.ReadOnly = true;
+        }
+
+        private void textBoxNumberOfDices_TextChanged(object sender, EventArgs e)
+        {
+            if (string.Equals(textBoxNumberOfDices.Text, ""))
+            {
+                MessageBox.Show("Please insert a positive value", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                diceRollerManager.NumberOfRolls = Convert.ToInt32(textBoxNumberOfDices.Text);
+            }
+        }
+
+        private void textBoxCustomDice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void textBoxCustomDice_TextChanged(object sender, EventArgs e)
+        {
+            if (string.Equals(textBoxCustomDice.Text, ""))
+            {
+                MessageBox.Show("Please insert a positive value", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                diceRollerManager.NumberOfDiceFaces = Convert.ToInt32(textBoxCustomDice.Text);
+            }
+        }
+
+        private void radioButtonAfterRolls_CheckedChanged(object sender, EventArgs e)
+        {
+            diceRollerManager.AddEachRoll = false;
+        }
+
+        private void radioButtonEachRoll_CheckedChanged(object sender, EventArgs e)
+        {
+            diceRollerManager.AddEachRoll = true;
+        }
+
+        private void buttonRoll_Click(object sender, EventArgs e)
+        {
+            //TODO: Add method to check if all required fields are properly filled
+
+            /* If we do consective rolls with a negative modifier, each time we enter here
+            * the modifier will be multiplied by -1, becoming positive, so we need to get it 
+            * again */
+
+            diceRollerManager.Modifier = Convert.ToInt32(textBoxDiceRollModifier.Text);
+            if (string.Equals(comboBoxModifierSignal.Text, "-"))
+            {
+                diceRollerManager.Modifier *= -1;
+            }
+
+            diceRollerManager.AccumulateValues();
+            ShowRollResults();
+        }
+
+        private void buttonClearRollResults_Click(object sender, EventArgs e)
+        {
+            textBoxRollResults.Text = "";
+        }
+        
+        private void textBoxRollResults_TextChanged(object sender, EventArgs e)
+        {
+            textBoxRollResults.SelectionStart = textBoxRollResults.Text.Length;
+            textBoxRollResults.ScrollToCaret();
+            textBoxRollResults.Refresh();
         }
         #endregion
     }

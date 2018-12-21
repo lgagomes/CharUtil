@@ -1,11 +1,19 @@
 using CharUtil;
 using System.Linq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace XUnitSpellcasters
 {
     public class UnitTest1
     {
+        private readonly ITestOutputHelper output;
+
+        public UnitTest1(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
+
         [Fact]
         public void TestWisdomModifier()
         {
@@ -81,7 +89,7 @@ namespace XUnitSpellcasters
                 // Assert            
                 Assert.Equal(SpellsPerDayBard, bard.DailySpells);
             }
-            catch { }           
+            catch { }
         }
 
         [Fact]
@@ -123,7 +131,7 @@ namespace XUnitSpellcasters
 
         [Fact]
         public void TestClericSpellsPerDay()
-        {           
+        {
             // Arrange
             Cleric cleric = new Cleric("cleric");
             int[,] SpellsPerDayCleric = new int[20, 10] {   {3,1,0,0,0,0,0,0,0,0},
@@ -199,7 +207,7 @@ namespace XUnitSpellcasters
         {
             // Arrange
             Wizard wizard = new Wizard("wizard");
-            int[,] SpellsPerDayWizard= new int[20, 10] {{3,1,0,0,0,0,0,0,0,0},
+            int[,] SpellsPerDayWizard = new int[20, 10] {{3,1,0,0,0,0,0,0,0,0},
                                                         {4,2,0,0,0,0,0,0,0,0},
                                                         {4,2,1,0,0,0,0,0,0,0},
                                                         {4,3,2,0,0,0,0,0,0,0},
@@ -310,7 +318,7 @@ namespace XUnitSpellcasters
         {
             // Arrange
             Bard bard = new Bard("bard");
-            int[] SpellsPerDayLevel_11 = new int[10] {3,3,3,3,1,0,0,0,0,0};
+            int[] SpellsPerDayLevel_11 = new int[10] { 3, 3, 3, 3, 1, 0, 0, 0, 0, 0 };
             int[] ReturnedSpellsPerDay = new int[10];
             int level = 11;
 
@@ -336,7 +344,7 @@ namespace XUnitSpellcasters
             Bard bard = new Bard("bard");
             bard.Charisma = 32;
             bard.KeyAttributeModifier = bard.GetModifier(bard.Charisma);
-            decimal [] extraSpells = new decimal[10] {0, 3, 3, 3, 2, 2, 2, -1, -1, -1};
+            decimal[] extraSpells = new decimal[10] { 0, 3, 3, 3, 2, 2, 2, -1, -1, -1 };
 
             // Act
             bard.UpdateExtraSpells();
@@ -344,7 +352,7 @@ namespace XUnitSpellcasters
             // Assert
             Assert.Equal(extraSpells, bard.ExtraSpells);
         }
-        
+
         [Fact]
         public void TestUpdateSpellsDC()
         {
@@ -428,7 +436,7 @@ namespace XUnitSpellcasters
             {
                 // Act
                 sorcerer.UpdateKnownSpells();
-            
+
                 // Assert           
                 Assert.Equal(spellsKnownSorcerer, sorcerer.KnownSpells);
             }
@@ -578,6 +586,22 @@ namespace XUnitSpellcasters
 
             // Assert
             Assert.Equal(expectedLevel, actualLevel);
+        }
+
+        [Fact]
+        public void TestRoll()
+        {
+            // Arrange
+            Dice dice = new Dice(6);
+            int rolledValue;
+
+            // Act
+            rolledValue = dice.Roll();
+
+            // Assert           
+            Assert.InRange<int>(rolledValue, 1, 6);
+            output.WriteLine(rolledValue.ToString());
+
         }
 
         //[Fact] // Must change the visibility of XPCalculator.GetDelta() to public
