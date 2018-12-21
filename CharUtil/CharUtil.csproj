@@ -72,7 +72,9 @@
     <Compile Include="FormXpProgression.Designer.cs">
       <DependentUpon>FormXpProgression.cs</DependentUpon>
     </Compile>
+    <Compile Include="Misc\DiceRollerManager.cs" />
     <Compile Include="Misc\CasterSelector.cs" />
+    <Compile Include="Misc\Dice.cs" />
     <Compile Include="Misc\IntelligenceBonuses.cs" />
     <Compile Include="Misc\LoadCalculator.cs" />
     <Compile Include="Misc\SkillPointsCalculator.cs" />

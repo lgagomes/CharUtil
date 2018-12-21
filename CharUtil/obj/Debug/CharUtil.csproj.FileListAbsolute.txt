@@ -1,7 +1,6 @@
 C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\bin\Debug\CharUtil.exe.config
 C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\bin\Debug\CharUtil.exe
 C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\bin\Debug\CharUtil.pdb
-C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\obj\Debug\CharUtil.csprojAssemblyReference.cache
 C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\obj\Debug\CharUtil.Form1.resources
 C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\obj\Debug\CharUtil.FormXpProgression.resources
 C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\obj\Debug\CharUtil.Properties.Resources.resources
@@ -9,3 +8,4 @@ C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\obj\Debug\CharUtil.csproj.
 C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\obj\Debug\CharUtil.csproj.CoreCompileInputs.cache
 C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\obj\Debug\CharUtil.exe
 C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\obj\Debug\CharUtil.pdb
+C:\Pessoais\Gustavo\C#\D&D_utils\CharUtil_V2\CharUtil\obj\Debug\CharUtil.csprojAssemblyReference.cache
