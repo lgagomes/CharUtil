@@ -1,4 +1,4 @@
-# CharUtil (provisional name)
+# CharUtil (Discontinued)
 Tool written in C# to help with some calculations to Dungeons & Dragons 3.5
 
 Features (so far):
@@ -20,3 +20,5 @@ Features (so far):
    - Class / non-class skill max rank points, based on character level
    - XP calculation for character level up (NOT  Challenge Rating (CR) / Encounter calculation).
    - Dice Roller
+   
+As of January 2019, this version is discontinued. The development has moved to another tool with better programming practices (https://github.com/lgagomes/Aemos)
