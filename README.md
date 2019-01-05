@@ -21,4 +21,4 @@ Features (so far):
    - XP calculation for character level up (NOT  Challenge Rating (CR) / Encounter calculation).
    - Dice Roller
    
-As of January 2019, this version is discontinued. The development has moved to another tool with better programming practices (https://github.com/lgagomes/Aemos)
+**As of January 2019, this version is discontinued. The development has moved to another tool with better programming practices (https://github.com/lgagomes/Aemos)
